@@ -1,0 +1,34 @@
+body {
+    font-family: 'Montserrat';
+    font-size: 26px;
+    color: $elements;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.field {
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    margin-bottom: 30px;
+    grid-gap: 1px;
+    cursor: pointer;
+}
+
+.cell {
+    outline: 1px solid $elements;
+    /* The outline creates the border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    /* original z-index */
+}
+
+.cell:hover {
+    background-color: $elements;
+}
