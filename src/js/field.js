@@ -1,8 +1,11 @@
 const field = document.createElement('div');
 field.className = 'field';
 document.body.append(field);
+const emptyCell = document.createElement('div');
+emptyCell.classList.add('cell', 'empty');
 
-for (let i = 1; i <= 15; i++) {
+for (let i = 1; i <= 16; i++) {
+  field.append(emptyCell);
   const cell = document.createElement('div');
   cell.classList.add('cell');
   field.append(cell);
@@ -21,25 +24,14 @@ for (let i = 0; i < numbers.length; i++) {
   cells[i].textContent = numbers[i];
 }
 
-// for (const cell of cells) {
-//   cell.onmousedown = function (event) {
-//     moveAt(event.pageX, event.pageY);
-//     function moveAt (pageX, pageY) {
-//       cell.style.left = (cell.clientHeight + 1) + 'px';
-//       cell.style.top = (cell.clientHeight + 1) + 'px';
-//     }
-//     function onMouseMove (event) {
-//       moveAt(event.pageX, event.pageY);
-//     }
-//     // передвигаем мяч при событии mousemove
-//     document.addEventListener('mousemove', onMouseMove);
-//     // отпустить мяч, удалить ненужные обработчики
-//     cell.onmouseup = function () {
-//       document.removeEventListener('mousemove', onMouseMove);
-//       cell.onmouseup = null;
-//     };
-//   };
-//   cell.ondragstart = function () {
-//     return false;
-//   };
-// };
+for (const cell of cells) {
+  cell.onclick = function () {
+    if (cell.nextElementSibling) {
+      if (cell.nextElementSibling.classList.contains('empty')) {
+        field.insertBefore(emptyCell, cell);
+      } else if (cell.previousElementSibling.classList.contains('empty')) {
+        field.insertBefore(cell, emptyCell);
+      }
+    }
+  };
+};
