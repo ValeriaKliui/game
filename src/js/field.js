@@ -21,25 +21,25 @@ for (let i = 0; i < numbers.length; i++) {
   cells[i].textContent = numbers[i];
 }
 
-for (const cell of cells) {
-  cell.onmousedown = function (event) {
-    moveAt(event.pageX, event.pageY);
-    function moveAt (pageX, pageY) {
-      cell.style.left = (cell.clientHeight + 1) + 'px';
-      cell.style.top = (cell.clientHeight + 1) + 'px';
-    }
-    function onMouseMove (event) {
-      moveAt(event.pageX, event.pageY);
-    }
-    // передвигаем мяч при событии mousemove
-    document.addEventListener('mousemove', onMouseMove);
-    // отпустить мяч, удалить ненужные обработчики
-    cell.onmouseup = function () {
-      document.removeEventListener('mousemove', onMouseMove);
-      cell.onmouseup = null;
-    };
-  };
-  cell.ondragstart = function () {
-    return false;
-  };
-};
+// for (const cell of cells) {
+//   cell.onmousedown = function (event) {
+//     moveAt(event.pageX, event.pageY);
+//     function moveAt (pageX, pageY) {
+//       cell.style.left = (cell.clientHeight + 1) + 'px';
+//       cell.style.top = (cell.clientHeight + 1) + 'px';
+//     }
+//     function onMouseMove (event) {
+//       moveAt(event.pageX, event.pageY);
+//     }
+//     // передвигаем мяч при событии mousemove
+//     document.addEventListener('mousemove', onMouseMove);
+//     // отпустить мяч, удалить ненужные обработчики
+//     cell.onmouseup = function () {
+//       document.removeEventListener('mousemove', onMouseMove);
+//       cell.onmouseup = null;
+//     };
+//   };
+//   cell.ondragstart = function () {
+//     return false;
+//   };
+// };

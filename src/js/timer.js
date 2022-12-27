@@ -1,3 +1,5 @@
+const cells = document.querySelectorAll('.field');
+
 const container = document.createElement('div');
 container.classList.add('info');
 document.body.prepend(container);
@@ -17,23 +19,44 @@ stopButton.disabled = true;
 
 const timer = document.createElement('div');
 timer.classList.add('timer');
-const seconds = 0;
-const minutes = 0;
-timer.textContent = `${minutes}:${seconds}`;
+let seconds = 0;
+let minutes = 0;
+timer.textContent = `${minutes}:0${seconds}`;
 container.append(timer);
+
 let timerId;
-restartButton.onclick = () => {
+for (const cell of cells) {
+  cell.addEventListener('click', startTimer, { once: true });
+}
+
+function startTimer () {
+  if (seconds > 0 || minutes > 0) {
+    seconds = 0;
+    minutes = 0;
+  }
   stopButton.disabled = false;
-  let i = 0;
   timerId = setInterval(() => {
-    i++;
-    timer.textContent = `${minutes}:${i}`;
-  }, '100'
+    seconds++;
+    if (seconds >= 60) {
+      minutes++;
+      seconds = 0;
+    }
+    seconds < 10 ? timer.textContent = `${minutes}:0${seconds}` : timer.textContent = `${minutes}:${seconds}`;
+  }, '1000'
   );
   restartButton.disabled = true;
-};
+}
+
 stopButton.onclick = () => {
   clearInterval(timerId);
   restartButton.disabled = false;
   stopButton.disabled = true;
+};
+
+restartButton.onclick = () => {
+  clearInterval(timerId);
+  stopButton.disabled = false;
+  startTimer();
+  timer.textContent = `${minutes}:0${seconds}`;
+  restartButton.disabled = true;
 };
